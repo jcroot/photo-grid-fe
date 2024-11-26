@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDropzone } from 'react-dropzone';
 import api from "../lib/api/api.ts";
 
@@ -7,12 +7,15 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
+    const [loading, setLoading] = useState(false)
+
     const onDrop = async (acceptedFiles: File[]) => {
         const formData = new FormData();
         acceptedFiles.forEach(file => {
             formData.append('images', file);
         });
 
+        setLoading(true);
         try {
             const response = await api.post<{ images: { thumbnailUrl: string }[] }>('/api/upload', formData, {
                 headers: {
@@ -22,6 +25,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
             onUpload(response.data.images);
         } catch (error) {
             console.error('Error uploading images:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -31,6 +36,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
         <div {...getRootProps()} style={{ border: '2px dashed #ccc', padding: '20px', textAlign: 'center' }}>
             <input {...getInputProps()} />
             <p>Drag & drop some files here, or click to select files</p>
+            {loading && <p>Uploading...</p>}
         </div>
     );
 };
