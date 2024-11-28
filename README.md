@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# Photo Gallery Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an image gallery application built with React and TypeScript. It allows users to upload images, view them in a grid, and click on images to view them in a modal.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Upload images using drag-and-drop.
+- Display images in a grid layout.
+- View images in a modal on click.
+- Fetch images from an API on load.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- React Dropzone
+- Axios
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Prerequisites
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Node.js
+- npm
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/jcroot/photo-grid-fe.git
+    cd photo-grid-fe
+    ```
+
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Running the Application
+
+1. Start the development server:
+    ```bash
+    npm start
+    ```
+
+2. Open your browser and navigate to `http://localhost:3000`.
+
+## Project Structure
+
+- `src/components/ImageGrid.tsx`: Component to display images in a grid layout.
+- `src/components/ImageModal.tsx`: Component to display an image in a modal.
+- `src/components/ImageUpload.tsx`: Component to handle image uploads.
+- `src/App.tsx`: Main application component.
+- `src/lib/api/api.ts`: API utility for making HTTP requests.
+
+## API Endpoints
+
+- `GET /api/images`: Fetches the list of images.
+- `POST /api/upload`: Uploads new images.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
