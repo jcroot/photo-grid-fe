@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import api from "../lib/api/api.ts";
 
 interface ImageUploadProps {
-    onUpload: (images: { thumbnailUrl: string }[]) => void;
+    onUpload: (images: { key: string, thumbnailUrl: string }[]) => void;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
@@ -17,7 +17,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
 
         setLoading(true);
         try {
-            const response = await api.post<{ images: { thumbnailUrl: string }[] }>('/api/upload', formData, {
+            const response = await api.post<{ images: { key: string, thumbnailUrl: string }[] }>('/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
